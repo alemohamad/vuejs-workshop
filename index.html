@@ -3,21 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>VueJS Workshop</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="styles.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 </head>
 <body>
 
     <div id="app">
-        <Skills name="Skills"></Skills>
+        <Skills />
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
     <script>
         Vue.component('Skills', {
-            props: ['name'],
-            template: `<div>
-                {{ name }}
+            data() {
+                return {
+                    skills: [
+                        { "skill": "Vue.js" },
+                        { "skill": "Laravel" },
+                        { "skill": "Swift" }
+                    ]
+                }
+            },
+            template: `<div class="container">
+                <div class="holder">
+                    <ul>
+                        <li v-for="(data, index) in skills" :key='index'>{{ data.skill }}</li>
+                    </ul>
+
+                    <p v-if="skills.length > 1">You have {{ skills.length }} skills</p>
+                    <p v-else-if="skills.length == 1">You have 1 skill</p>
+                    <p v-else>You don't have any skill</p>
+                </div>
             </div>`
         });
 
