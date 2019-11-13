@@ -22,22 +22,35 @@
                         { "skill": "Vue.js" },
                         { "skill": "Laravel" },
                         { "skill": "Swift" }
-                    ]
+                    ],
+                    showAlert: false
                 }
             },
             methods: {
                 addSkill() {
+                    if (this.skill.length == 0) {
+                        this.showAlert = true;
+                        return;
+                    }
+                    this.resetAlert();
                     this.skills.push({ skill: this.skill });
                     this.skill = '';
                 },
                 remove(id) {
                     this.skills.splice(id, 1);
+                },
+                resetAlert() {
+                    this.showAlert = false;
                 }
             },
             template: `<div class="container">
                 <form @submit.prevent="addSkill">
                     <input type="text" placeholder="Enter a skill you have..." v-model="skill">
                 </form>
+
+                <div class="alert" v-bind:class="{ show: showAlert }" v-on:click="resetAlert()">
+                  <i class="fa fa-bomb"></i> Nothing is not a skill
+                </div>
 
                 <div class="holder">
                     <ul>
