@@ -17,6 +17,7 @@
         Vue.component('Skills', {
             data() {
                 return {
+                    skill: '',
                     skills: [
                         { "skill": "Vue.js" },
                         { "skill": "Laravel" },
@@ -25,6 +26,8 @@
                 }
             },
             template: `<div class="container">
+                <input type="text" placeholder="Enter a skill you have.." v-model="skill">
+                    {{ skill }}
                 <div class="holder">
                     <ul>
                         <li v-for="(data, index) in skills" :key='index'>{{ data.skill }}</li>
