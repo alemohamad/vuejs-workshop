@@ -23,16 +23,27 @@
                         { "skill": "Laravel" },
                         { "skill": "Swift" }
                     ],
-                    showAlert: false
+                    showAlert: false,
+                    showRepeat: false
                 }
             },
             methods: {
+                findRepeat() {
+                    return this.skills.find(element => element.skill == this.skill);
+                },
                 addSkill() {
+                    this.resetAlert();
+
                     if (this.skill.length == 0) {
                         this.showAlert = true;
                         return;
                     }
-                    this.resetAlert();
+
+                    if (this.findRepeat()) {
+                        this.showRepeat = true;
+                        return;
+                    }
+
                     this.skills.push({ skill: this.skill });
                     this.skill = '';
                 },
@@ -41,6 +52,7 @@
                 },
                 resetAlert() {
                     this.showAlert = false;
+                    this.showRepeat = false;
                 }
             },
             template: `<div class="container">
@@ -50,6 +62,10 @@
 
                 <div class="alert" v-bind:class="{ show: showAlert }" v-on:click="resetAlert()">
                   <i class="fa fa-bomb"></i> Nothing is not a skill
+                </div>
+
+                <div class="alert" v-bind:class="{ show: showRepeat }" v-on:click="resetAlert()">
+                  <i class="fa fa-warning"></i> That skill was already added
                 </div>
 
                 <div class="holder">
