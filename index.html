@@ -60,18 +60,18 @@
                     <input type="text" placeholder="Enter a skill you have..." v-model="skill">
                 </form>
 
-                <div class="alert" v-bind:class="{ show: showAlert }" v-on:click="resetAlert()">
+                <div class="alert" v-bind:class="{ show: showAlert }" @click="resetAlert()">
                   <i class="fa fa-bomb"></i> Nothing is not a skill
                 </div>
 
-                <div class="alert" v-bind:class="{ show: showRepeat }" v-on:click="resetAlert()">
+                <div class="alert" v-bind:class="{ show: showRepeat }" @click="resetAlert()">
                   <i class="fa fa-warning"></i> That skill was already added
                 </div>
 
                 <div class="holder">
                     <ul>
                         <li v-for="(data, index) in skills" :key='index'>{{ data.skill }}
-                            <i class="fa fa-trash" v-on:click="remove(index)"></i>
+                            <i class="fa fa-trash" @click="remove(index)"></i>
                         </li>
                     </ul>
 
